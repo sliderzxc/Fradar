@@ -76,4 +76,6 @@ dependencies {
     implementation(libs.mvikotlin.core)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin.coroutines)
+    // Google
+    implementation(libs.google.auth)
 }
