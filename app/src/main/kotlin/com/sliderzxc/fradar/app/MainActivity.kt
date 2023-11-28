@@ -3,7 +3,10 @@ package com.sliderzxc.fradar.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.sliderzxc.fradar.features.auth.ui.screen.AuthScreen
+import com.arkivanov.decompose.defaultComponentContext
+import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
+import com.sliderzxc.fradar.features.common.ContentView
+import com.sliderzxc.fradar.navigation.root.RootComponent
 import com.sliderzxc.fradar.themes.FradarTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +14,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FradarTheme {
-                AuthScreen()
+                val rootComponent = RootComponent(
+                    componentContext = defaultComponentContext(),
+                    storeFactory = DefaultStoreFactory(),
+                )
+                setContent {
+                    ContentView(component = rootComponent)
+                }
             }
         }
     }

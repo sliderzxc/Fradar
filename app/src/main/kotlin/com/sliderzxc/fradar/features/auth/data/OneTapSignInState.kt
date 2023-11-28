@@ -1,4 +1,4 @@
-package com.sliderzxc.fradar.onetap
+package com.sliderzxc.fradar.features.auth.data
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
