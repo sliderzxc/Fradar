@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
+import com.sliderzxc.fradar.BuildConfig
 import com.sliderzxc.fradar.features.auth.navigation.AuthComponent
 
 @Composable
@@ -25,21 +26,17 @@ fun AuthScreen(
 ) {
     val activity = LocalContext.current as Activity
     val oneTapClient = Identity.getSignInClient(activity)
-    val signInRequest = BeginSignInRequest.builder()
-        .setPasswordRequestOptions(
-            BeginSignInRequest.PasswordRequestOptions.builder()
-                .setSupported(false)
-                .build()
-        )
-        .setGoogleIdTokenRequestOptions(
-            BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                .setSupported(true)
-                .setServerClientId("webClientId")
-                .setFilterByAuthorizedAccounts(false)
-                .build()
-        )
-        .setAutoSelectEnabled(false)
-        .build()
+
+    val signInRequest = BeginSignInRequest.builder().setPasswordRequestOptions(
+        BeginSignInRequest.PasswordRequestOptions.builder().setSupported(false).build()
+    ).setGoogleIdTokenRequestOptions(
+        BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+            .setSupported(true)
+            .setServerClientId(BuildConfig.WEB_CLIENT_ID)
+            .setFilterByAuthorizedAccounts(false)
+            .build()
+    ).setAutoSelectEnabled(false).build()
+
     val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartIntentSenderForResult()
     ) { result ->
@@ -73,7 +70,6 @@ fun AuthScreen(
                         )
                     }
                 },
-                //enabled = !state.opened
             ) {
                 Text(text = "Sign in")
             }

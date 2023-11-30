@@ -6,8 +6,8 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.sliderzxc.fradar.navigation.configuration.FradarNavConfiguration
 import com.sliderzxc.fradar.features.auth.navigation.AuthComponent
+import com.sliderzxc.fradar.navigation.configuration.FradarNavConfiguration
 
 class RootComponent internal constructor(
     componentContext: ComponentContext,

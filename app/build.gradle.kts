@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -19,6 +21,15 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        val properties = Properties()
+        properties.load(project.rootProject.file(".env").inputStream())
+
+        buildConfigField(
+            type = "String",
+            name = "WEB_CLIENT_ID",
+            value = "\"${properties.getProperty("WEB_CLIENT_ID")}\""
+        )
     }
 
     buildTypes {
@@ -36,14 +47,18 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = "1.5.3"
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
 
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    composeOptions.kotlinCompilerExtensionVersion = "1.5.3"
 }
 
 dependencies {
